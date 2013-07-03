@@ -6,7 +6,11 @@ module.exports = HashRouter
 
 function HashRouter(opts) {
     function applyChange(event) {
-        var hash = getRoute() || "/"
+        var hash = getRoute()
+
+        if (hash === "") {
+            return
+        }
 
         var route = router.match(hash)
         if (route) {
