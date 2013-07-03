@@ -63,6 +63,58 @@ test("HashRouter broadcasts deltas in routes", function (assert) {
     })
 })
 
+test("HashRouter deals with no hash in previous route", function (assert) {
+    var location = LocationShim("/foo")
+    var router = HashRouter(location)
+
+    router.addRoute("/bar", function (hash, opts) {
+        assert.equal(hash, "/bar")
+        assert.deepEqual(opts, {
+            params: {},
+            splats: [],
+            newUrl: "/bar",
+            oldUrl: "/"
+        })
+
+        assert.end()
+    })
+
+    router()
+    location.setRoute("/bar")
+    router({
+        newURL: "/#/bar",
+        oldURL: ""
+    })
+})
+
+test("HashRouter deals with no hash in new route", function (assert) {
+    var location = LocationShim("/foo")
+    var router = HashRouter(location)
+
+    router.addRoute("*", function (hash, opts) {
+        if (hash === "/foo") {
+            return
+        }
+
+        assert.equal(hash, "/")
+        assert.deepEqual(opts, {
+            params: {},
+            splats: ["/"],
+            newUrl: "/",
+            oldUrl: "/foo"
+        })
+
+        assert.end()
+    })
+
+    router()
+    location.setRoute("/")
+    router({
+        newURL: "",
+        oldURL: "/#/foo"
+    })
+})
+
 function LocationShim(uri) {
     uri = uri || "/"
 
