@@ -10,10 +10,20 @@ function HashRouter(opts) {
 
         var route = router.match(hash)
         if (route) {
-            var newHash = event ?
-                url.parse(event.newURL).hash.substring(1) : hash
-            var oldHash = event ?
-                url.parse(event.oldURL).hash.substring(1) : hash
+            var newHash = hash
+            var oldHash = "/"
+
+            if (event) {
+                var newUrl = url.parse(event.newURL)
+                if (newUrl && "hash" in newUrl) {
+                    newHash = newUrl.hash.substring(1)
+                }
+
+                var oldUrl = url.parse(event.oldURL)
+                if (oldUrl && "hash" in oldUrl) {
+                    oldHash = oldUrl.hash.substring(1)
+                }
+            }
 
             route.fn(hash, {
                 params: route.params,
