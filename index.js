@@ -6,7 +6,7 @@ module.exports = HashRouter
 
 function HashRouter(opts) {
     function applyChange(event) {
-        var hash = getRoute()
+        var hash = getRoute() || "/"
 
         var route = router.match(hash)
         if (route) {
@@ -41,6 +41,7 @@ function HashRouter(opts) {
     var router = Router()
 
     applyChange.go = setRoute
+    applyChange.get = getRoute
     applyChange.addRoute = router.addRoute.bind(router)
 
     return applyChange
