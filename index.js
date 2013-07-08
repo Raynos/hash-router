@@ -8,10 +8,6 @@ function HashRouter(opts) {
     function applyChange(event) {
         var hash = getRoute()
 
-        if (hash === "") {
-            return
-        }
-
         var route = router.match(hash)
         if (route) {
             var newHash = hash
@@ -56,5 +52,5 @@ function defaultSetRoute(uri) {
 }
 
 function defaultGetRoute() {
-    return location.hash.substring(1)
+    return location.hash.substring(1) || "/"
 }
