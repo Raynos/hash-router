@@ -11,17 +11,17 @@ function HashRouter(opts) {
         var route = router.match(hash)
         if (route) {
             var newHash = hash
-            var oldHash = "/"
+            var oldHash = "#/"
 
             if (event) {
                 var newUrl = url.parse(event.newURL)
                 if (newUrl && "hash" in newUrl) {
-                    newHash = newUrl.hash.substring(1)
+                    newHash = newUrl.hash
                 }
 
                 var oldUrl = url.parse(event.oldURL)
                 if (oldUrl && "hash" in oldUrl) {
-                    oldHash = oldUrl.hash.substring(1)
+                    oldHash = oldUrl.hash
                 }
             }
 
@@ -52,5 +52,5 @@ function defaultSetRoute(uri) {
 }
 
 function defaultGetRoute() {
-    return location.hash.substring(1) || "/"
+    return location.hash || "#/"
 }
