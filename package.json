@@ -1,6 +1,6 @@
 {
   "name": "hash-router",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A frontend router for the hash change event",
   "keywords": [],
   "author": "Raynos <raynos2@gmail.com>",
