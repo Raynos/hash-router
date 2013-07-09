@@ -19,6 +19,27 @@ window.addEventListener("hashchange", router)
 router() // start the router
 ```
 
+### Docs
+
+```ocaml
+type RouteHandler := (hash: String, opts: {
+    params: Object,
+    splats: Array<String>,
+    newUrl: String,
+    oldUrl: String
+}) => void
+
+hash-router := (opts?: {
+    setRoute?: (String) => void,
+    getRoute?: () => String
+}) => {
+    (HashChangeEvent?) => void,
+    go: (String) => void,
+    get: () => String,
+    addRoute: (pattern: String | RegExp, handler: RouteHandler) => void
+}
+```
+
 ## Installation
 
 `npm install hash-router`
