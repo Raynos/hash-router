@@ -12,8 +12,12 @@ A frontend router for the hash change event
 var HashRouter = require("hash-router")
 
 var router = HashRouter()
-router.addRoute("/", renderHome)
-router.addRoute("/login", showLoginDialog)
+router.addRoute("#/", renderHome)
+router.addRoute("#/login", showLoginDialog)
+
+router.on("hash", function (hash, event) {
+  console.log("hash changed!", hash)
+})
 
 window.addEventListener("hashchange", router)
 router() // start the router
@@ -32,7 +36,7 @@ type RouteHandler := (hash: String, opts: {
 hash-router := (opts?: {
     setRoute?: (String) => void,
     getRoute?: () => String
-}) => {
+}) => EventEmitter & {
     (HashChangeEvent?) => void,
     go: (String) => void,
     get: () => String,
