@@ -56,7 +56,7 @@ function HashRouter(opts) {
 }
 
 function defaultSetRoute(uri) {
-    location.hash = "#" + uri
+    location.hash = uri
 }
 
 function defaultGetRoute() {
