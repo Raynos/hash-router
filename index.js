@@ -12,14 +12,14 @@ function HashRouter(opts) {
         var newHash = hash
         var oldHash = "#/"
 
-        if (event && event.newURL && event.oldURL) {
+        if (event && "newURL" in event && "oldURL" in event) {
             var newUrl = url.parse(event.newURL)
-            if (newUrl && "hash" in newUrl) {
+            if (newUrl && newUrl.hash) {
                 newHash = newUrl.hash
             }
 
             var oldUrl = url.parse(event.oldURL)
-            if (oldUrl && "hash" in oldUrl) {
+            if (oldUrl && oldUrl.hash) {
                 oldHash = oldUrl.hash
             }
         }
